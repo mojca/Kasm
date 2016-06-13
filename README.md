@@ -11,6 +11,26 @@ and distributed via
 The original sources including the Windows binary are available in the [upstream branch](https://github.com/mojca/Kasm/tree/upstream).
 The master branch contains minor modifications done by Mojca Miklavec, mainly structural ones (Makefile, file reorganisation etc.)
 
+## Introduction
+
+Program Kasm is designed for calculation of geomagnetic activity indices *K* on the basis of recorded geomagnetic field components, according to the ASm method.
+
+The program is a console application working under both Windows and UNIX. To compile the program under UNIX, just run `make` inside the source repository.
+
+The Kasm accepts two formats of input data:
+* [IAF](http://www.intermagnet.org/data-donnee/formats/iaf-eng.php) (INTERMAGNET archive format) such as the Definitive data format in the [INTERMAGNET DVD/CD-ROM](http://www.intermagnet.org/data-donnee/cdrom/cddata-eng.php),
+* [IMFV1.22](http://www.intermagnet.org/data-donnee/formats/imfv122-eng.php) text format.
+
+The *K*-indices calculated with the use of program Kasm can be stored either in the `IAF` files or `*.DKA` text file, depending upon the parameters of program call.
+
+The most important features of the program include the following:
+* a possibility of choosing whether the indices are to be calculated from the horizontal components *X* and *Y* or *H* and *D*.
+* a possibility of storing the calculated indices onto text files as well as to the `IAF` files.
+
+Moreover, while calling the program with adequate parameters one can obtain additional interesting information, such as:
+* a post-script plot representing, for a given day, the filtration of daily variations SR according to the ASm method
+* information on differences between the indices calculated by the Kasm program and the indices contained in the input `IAF` files
+
 ## Usage
 
 ```
