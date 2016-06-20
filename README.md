@@ -54,7 +54,7 @@ Moreover, while calling the program with adequate parameters one can obtain addi
 |                | `0`  | means that *H* stored 1-min Intermagnet binary file(s) is to be used,<br /> K-indices will be calculated from *HD* components |
 |                | `xy` | K-indices will be calculated from *XY* components |
 | `out`          |      | name of output text file, this name will be supplemented with extensions `'dka'`, `'K'`, `'plo'`, `'ps'`, `'log'` |
-| `path`         |      | directory with input data, e.g. `d:\\data\\binary\\`,<br /> must end with backslash |
+| `path`         |      | directory with input data, e.g. `d:\data\binary\`,<br /> must end with backslash |
 | `-0|-1|-2|-3 ` | `-0` | K's will be calculated from one day |
 |                | `-1` | K's calculated from preceding and current day |
 |                | `-2` | K's calculated from current and subsequent day |
