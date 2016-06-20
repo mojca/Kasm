@@ -48,7 +48,7 @@ Moreover, while calling the program with adequate parameters one can obtain addi
 | `mmm`          |      | month (JAN..DEC), starting date |
 | `yyyy`         |      | year, starting date, e.g. *2001* |
 | `days`         |      | number of days, obligatory, e.g. *365*<br /> *Note:  parameter 'days' is not allowed in case of use of switch `-p`* |
-| `K9|0`         |      | K9 limit K9-index in nT, examples: *450*, *700*<br /> 0 means that K9 stored in 1-min Intermagnet binary file(s) is to be used |
+| `K9|0`         |      | K<sub>9</sub> limit K<sub>9</sub>-index in nT, examples: *450*, *700*<br /> 0 means that K<sub>9</sub> stored in 1-min Intermagnet binary file(s) is to be used |
 | `smth`         |      | smoothing coefficient for the observatory, default *1.0*
 | `H|0|xy`       | `H`  | annual value of *H*-component in nT,<br />K-indices will be calculated from HD elements, e.g. *18720, 8245* |
 |                | `0`  | means that *H* stored 1-min Intermagnet binary file(s) is to be used,<br /> K-indices will be calculated from *HD* components |
@@ -64,3 +64,54 @@ Moreover, while calling the program with adequate parameters one can obtain addi
 | `-c`           |      | current K's are compared with previous K's stored in 1-min Intermagnet binary file(s), result of comparison is placed in output text file |
 | `-u`           |      | current K's are stored to 1-min Intermagnet binary file(s) |
 | `-l`           |      | causes creating `*.log` file containing debug information |
+
+## Examples
+The use of the Kasm program is illustrated below on 5 examples of its typical applications. (The syntax works on Windows.)
+
+###  Example 1.
+The IAF XYZF (or XYZG or XYZ) files are supplemented with the K-indices calculated from components *X* and *Y*.
+
+### Example 2.
+The IAF HDZF files are supplemented with the K-indices calculated from components *H* and *D*.
+
+### Example 3.
+The K-indices are calculated from components *H* and *D* on the basis of IAF *XYZF* (or *XYZG* or *XYZ*) files containing previously calculated indices. A comparison of indices calculated by Kasm and those contained in IAF files.
+
+### Example 4.
+Calculation of the indices from the Intermagnet text files in the IMFV1.22 format.
+
+**INPUT:**
+* The hard disk directory `D:\IMAG\IMF` contains 365 Intermagnet text files `?????99.BEL` written in format IMFV1.22.
+* Files ``?????99.BEL`` contain data on components *X*, *Y*, *Z*, and *F*.
+
+**OUTPUT:**
+* The user requests that a text file `BEL99K.DKA` containing K-indices,
+  similar to the `*.DKA` files from the INTERMAGNET CD-ROM, be created
+  in the existing directory `D:\IMAG\REPORT`.
+* The indices are to be calculated on the basis of components *X* and *Y*,
+  according to the limit K<sub>9</sub>=450 nT specified in the command line.
+
+**COMMAND:**
+```
+Kasm BEL:01JAN1999:365 450 xy D:\IMAG\REPORT\BEL99K D:\IMAG\IMF\
+```
+
+**NOTES:**
+* Parameter `450` in the command line means that the value K<sub>9</sub>=450 nT is to be
+  used for the K-index calculation.
+* Parameter `xy` means that the K-indices are to be calculated from components
+  *X* and *Y*, even if the text files IMFV1.22 contained components *H*, *D*, *Z*,
+  and *F*.
+* Parameter `D:\IMAG\IMF\` determining the path to the text files IMFV1.22
+  must be obligatorily terminated by character `\`.
+* Parameter `D:\IMAG\REPORT\BEL99K` means that a text file
+  `BEL99K.DKA` containing K-indices will be created in directory `D:\IMAG\REPORT`.
+  This file can be, for instance, used, upon modification of the header part,
+  as a file to be placed on INTERMAGNET CD-ROM.
+* For a more correct calculation of „boundary” K-indices for the periods:
+  `1999-01-01 00-03 UT`
+  `1999-12-31 21-24 UT`
+  files `DEC3198.BEL` and `JAN0100.BEL` are to be placed in the directory `D:\IMAG\IMF`.
+
+### Example 5.
+Creation of a post-script plot representing filtration of daily variations SR according to the ASm method.
