@@ -108,10 +108,56 @@ Kasm BEL:01JAN1999:365 450 xy D:\IMAG\REPORT\BEL99K D:\IMAG\IMF\
   `BEL99K.DKA` containing K-indices will be created in directory `D:\IMAG\REPORT`.
   This file can be, for instance, used, upon modification of the header part,
   as a file to be placed on INTERMAGNET CD-ROM.
-* For a more correct calculation of „boundary” K-indices for the periods:
-  `1999-01-01 00-03 UT`
-  `1999-12-31 21-24 UT`
+* For a more correct calculation of „boundary” K-indices for the two periods:
+
+          1999-01-01 00-03 UTC
+          1999-12-31 21-24 UTC
+
   files `DEC3198.BEL` and `JAN0100.BEL` are to be placed in the directory `D:\IMAG\IMF`.
 
 ### Example 5.
 Creation of a post-script plot representing filtration of daily variations SR according to the ASm method.
+
+**INPUT:**
+* The hard disk directory `D:\IMAG\BIN` contains IAF file `BEL99JUL.BIN`.
+  The file contains, among other things, the previously calculated K-indices.
+
+**OUTPUT:**
+* The user wants to be able to assess in a visual manner the performance
+  of the ASm filtration for data of July 8, 1999, and to obtain a comparison
+  of currently calculated indices with those contained in the IAF file.
+  The indices are to be calculated according to the limit K<sub>9</sub>=450 nT.
+* The K-indices are to be calculated from components *H* and *D*
+  (in spite of the fact that the IAF files contain components *X*, *Y*, *Z*, *F*);
+  the *D*-conversion factor is to be calculated with the use of *H*=19000 nT.
+* The user requests that – whenever possible – the data from adjacent day be also used for the index calculation.
+
+**COMMAND:**
+```
+Kasm BEL:08JUL1999 450 19000 D:\IMAG\REPORT\BELTEST D:\IMAG\BIN\ -3 -b -p
+```
+
+**NOTES:**
+* Parameter `450` means that K-indices are to be calculated with the use of the
+  value K<sub>9</sub>=450 nT given in the command line.
+  If K<sub>9</sub>-value from the command line and that read from the IAF file disagree,
+  the user will be notified about this fact.
+  In that case, the program will calculate indices according to K<sub>9</sub>=450,
+  since the data specified in the command line are preferential to those read from the IAF file.
+* Parameter `19000` means that the K-indices are to be calculated from components *H* and *D*,
+  and the conversion of component *D* into the changes expressed in nT is to be made
+  with the use of the *D*-conversion factor calculated on the basis of *H*=19000 nT.
+* Parameter `D:\IMAG\BIN\` determining the path to the IAF files must necessarily be terminated with character `\`
+* Parameter `-3` means that the K-indices are to be calculated, whenever possible,
+  with the use of the data of the adjacent day too. The neglect of the data from the
+  adjacent day (e.g., the use of parameter `-0`) would produce greater errors of determining
+  the “boundary” indices, i.e., those for the time intervals `00-03` and `21-24`.
+* Parameter `-b` informs that the data for the index calculation are in IAF files; in our example, in file `BEL99JUL.BIN`.
+* Parameter `-p` is in this case crucial, since it is responsible for the creation of
+  postscript file named `BELTEST.PS` in the directory `D:\IMAG\REPORT`.
+  The plot in the file `BELTEST.PS` contains, among other things, the following;
+  - a plot illustrating the ASm filtration used in the program,
+  - the K-indices calculated for each component (*H* and *D*) separately,
+  - the currently calculated indices for each 3-hour interval and the indices contained in the IAF file.
+
+To visualize the post-script plot one can use, for instance, a free program available from the internet address http://www.cs.wisc.edu/~ghost/gsview/.
